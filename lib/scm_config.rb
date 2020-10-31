@@ -24,7 +24,7 @@ protected
     def initialize
         file = "#{Rails.root}/config/scm.yml"
         if File.file?(file)
-            config = YAML::load_file(file)
+            config = YAML::load(ERB.new(File.read(file)).result)
             if config.is_a?(Hash) && config.has_key?(Rails.env)
                 @@configs = config[Rails.env]
             else
