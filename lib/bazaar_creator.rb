@@ -1,4 +1,4 @@
-class BazaarCreator < SCMCreator
+class BazaarCreator < ScmCreator
 
     class << self
 

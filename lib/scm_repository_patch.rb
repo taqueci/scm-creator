@@ -1,4 +1,4 @@
-require_dependency 'repository'
+require 'repository'
 
 module ScmRepositoryPatch
 
@@ -13,7 +13,7 @@ module ScmRepositoryPatch
 
         def remove_repository_files
             if created_with_scm
-                interface = SCMCreator.interface(self)
+                interface = ScmCreator.interface(self)
                 if interface
                     name = interface.repository_name(root_url)
                     if name

@@ -1,4 +1,4 @@
-class SCMCreator
+class ScmCreator
     include Redmine::I18n
 
     class << self

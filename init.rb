@@ -5,21 +5,21 @@ begin
 rescue LoadError
 end
 
-require_dependency 'creator/scm_creator'
-require_dependency 'creator/subversion_creator'
-require_dependency 'creator/mercurial_creator'
-require_dependency 'creator/git_creator'
-require_dependency 'creator/bazaar_creator'
-require_dependency 'creator/github_creator'
+require File.expand_path('lib/scm_creator', __dir__)
+require File.expand_path('lib/subversion_creator', __dir__)
+require File.expand_path('lib/mercurial_creator', __dir__)
+require File.expand_path('lib/git_creator', __dir__)
+require File.expand_path('lib/bazaar_creator', __dir__)
+require File.expand_path('lib/github_creator', __dir__)
 
-require_dependency 'scm_config'
-require_dependency 'scm_hook'
+require File.expand_path('lib/scm_config', __dir__)
+require File.expand_path('lib/scm_hook', __dir__)
 
 Rails.logger.info 'Starting SCM Creator Plugin for Redmine'
 
 Redmine::Scm::Base.add('Github')
 
-Rails.configuration.to_prepare do
+def init()
     unless Project.included_modules.include?(ScmProjectPatch)
         Project.send(:include, ScmProjectPatch)
     end
@@ -34,6 +34,14 @@ Rails.configuration.to_prepare do
     end
 end
 
+if Rails.version > '6.0'
+    init()
+else
+    Rails.configuration.to_prepare do
+        init()
+    end
+end
+
 Redmine::Plugin.register :redmine_scm do
     requires_redmine version_or_higher: '4.0'
     name        'SCM Creator'
@@ -41,5 +49,5 @@ Redmine::Plugin.register :redmine_scm do
     author_url  'http://www.andriylesyuk.com/'
     description 'Allows creating Subversion, Git, Mercurial, Bazaar and Github repositories within Redmine.'
     url         'http://projects.andriylesyuk.com/projects/scm-creator'
-    version     '0.5.1.2.0'
+    version     '0.5.1.3.0'
 end
