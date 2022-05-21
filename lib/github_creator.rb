@@ -1,4 +1,4 @@
-class GithubCreator < SCMCreator
+class GithubCreator < ScmCreator
 
     class << self
 

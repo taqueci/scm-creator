@@ -1,4 +1,4 @@
-require_dependency 'repositories_controller'
+require 'repositories_controller'
 
 module ScmRepositoriesControllerPatch
 
@@ -28,9 +28,9 @@ module ScmRepositoriesControllerPatch
         #end
 
         def create
-            interface = SCMCreator.interface(params[:repository_scm])
+            interface = ScmCreator.interface(params[:repository_scm])
 
-            if (interface && (interface < SCMCreator) && interface.enabled? &&
+            if (interface && (interface < ScmCreator) && interface.enabled? &&
               ((params[:operation].present? && params[:operation] == 'add') || ScmConfig['only_creator'])) ||
                !ScmConfig['allow_add_local']
 

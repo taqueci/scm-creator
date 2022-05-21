@@ -1,4 +1,4 @@
-class SubversionCreator < SCMCreator
+class SubversionCreator < ScmCreator
 
     class << self
 

@@ -1,4 +1,4 @@
-require_dependency 'project'
+require 'project'
 
 module ScmProjectPatch
 
@@ -25,7 +25,7 @@ module ScmProjectPatch
                 if @repository
                     @repository.project = self
 
-                    interface = SCMCreator.interface(@scm)
+                    interface = ScmCreator.interface(@scm)
                     if interface
                         path = interface.default_path(self.identifier)
 
@@ -56,7 +56,7 @@ module ScmProjectPatch
 
         def repository_exists
             if @scm.present? && self.identifier.present? && self.module_enabled?(:repository) && ScmConfig['auto_create']
-                interface = SCMCreator.interface(@scm)
+                interface = ScmCreator.interface(@scm)
                 if interface
                     if interface.local? && interface.repository_exists?(self.identifier)
                         if ScmConfig['allow_pickup']

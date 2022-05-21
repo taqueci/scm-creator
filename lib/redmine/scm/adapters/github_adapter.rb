@@ -1,4 +1,4 @@
-require_dependency 'redmine/scm/adapters/git_adapter'
+require 'redmine/scm/adapters/git_adapter'
 
 module Redmine
     module Scm

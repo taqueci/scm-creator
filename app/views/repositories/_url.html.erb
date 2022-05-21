@@ -5,7 +5,7 @@
 <% content_for(:sidebar) do %>
   <h3><%= l(:label_repository_url) %></h3>
 
-  <% if repository.created_with_scm && (interface = SCMCreator.interface(repository)) %>
+  <% if repository.created_with_scm && (interface = ScmCreator.interface(repository)) %>
     <% repository_url = interface.external_url(repository) || repository.url %>
   <% else %>
     <% repository_url = repository.url %>

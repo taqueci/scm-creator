@@ -1,4 +1,4 @@
-class MercurialCreator < SCMCreator
+class MercurialCreator < ScmCreator
 
     class << self
 
